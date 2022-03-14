@@ -1,7 +1,7 @@
 package constants
 
 import (
-    "time"
+	"time"
 )
 
 const AppName = "musicfox"
@@ -9,9 +9,9 @@ const AppVersion = "2.1.0"
 const AppVersionInt = 20100
 const AppDescription = "<cyan>Musicfox - 命令行版网易云音乐</>"
 const AppShowStartup = true
-const AppGithubUrl = "https://github.com/anhoder/go-musicfox"
-const AppLatestReleases = "https://github.com/anhoder/go-musicfox/releases/latest"
-const AppCheckUpdateUrl = "https://api.github.com/repos/anhoder/go-musicfox/releases/latest"
+const AppGithubUrl = "https://github.com/MJ23333/go-musicfox"
+const AppLatestReleases = "https://github.com/anhoder/MJ23333/go-musicfox/releases/latest"
+const AppCheckUpdateUrl = "https://api.github.com/repos/MJ23333/go-musicfox/releases/latest"
 const ProgressFullChar = "#"
 const ProgressEmptyChar = " "
 const StartupProgressOutBounce = true
@@ -28,7 +28,7 @@ const AppPrimaryRandom = "random"
 const PlayerSongBr = 320000 // 999000
 
 const MainShowTitle = true
-const MainLoadingText = "[加载中...]"
+const MainLoadingText = "[加载中🤔...]"
 const MainShowLyric = true
 const MainShowNotify = true
 

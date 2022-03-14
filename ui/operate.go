@@ -2,14 +2,15 @@ package ui
 
 import (
 	"fmt"
-	"github.com/anhoder/netease-music/service"
-	"github.com/muesli/termenv"
 	"go-musicfox/constants"
 	"go-musicfox/db"
 	"go-musicfox/ds"
 	"go-musicfox/utils"
 	"math"
 	"strconv"
+
+	"github.com/anhoder/netease-music/service"
+	"github.com/muesli/termenv"
 )
 
 type menuStackItem struct {
@@ -316,6 +317,60 @@ func spaceKeyHandle(m *NeteaseModel) {
 
 }
 
+// 空格监听
+func spaceKeyHandle1(m *NeteaseModel) {
+	var (
+		songs []ds.Song
+	)
+	// inPlayingMenu = m.player.InPlayingMenu())
+	// if inPlayingMenu && !m.menu.ResetPlaylistWhenPlay() {
+	songs = m.player.playlist
+	if data, ok := m.menu.MenuData().([]ds.Song); ok {
+		// songs = append(songs, data[m.selectedIndex])
+		m.player.extra = append(m.player.extra, data[m.selectedIndex])
+		utils.Notify(fmt.Sprintf("把 %s 加入临时歌单", data[m.selectedIndex].Name), fmt.Sprintf("临时歌单还有 %d 首歌", len(m.player.extra)), constants.AppGithubUrl)
+	}
+
+	// }
+
+	// selectedIndex := m.selectedIndex
+	// if !m.menu.IsPlayable() || len(songs) == 0 || m.selectedIndex > len(songs)-1 {
+	// 	if m.player.curSongIndex > len(m.player.playlist)-1 {
+	// 		return
+	// 	}
+
+	// 	switch m.player.State {
+	// 	case utils.Paused:
+	// 		m.player.Resume()
+	// 	case utils.Playing:
+	// 		m.player.Paused()
+	// 	case utils.Stopped:
+	// 		_ = m.player.PlaySong(m.player.playlist[m.player.curSongIndex], DurationNext)
+	// 	}
+
+	// 	return
+	// }
+
+	// if inPlayingMenu && songs[selectedIndex].Id == m.player.playlist[m.player.curSongIndex].Id {
+	// 	switch m.player.State {
+	// 	case utils.Paused:
+	// 		m.player.Resume()
+	// 	case utils.Playing:
+	// 		m.player.Paused()
+	// 	}
+	// } else {
+	// 	m.player.curSongIndex = selectedIndex
+	// 	m.player.playingMenuKey = m.menu.GetMenuKey()
+	// 	m.player.playingMenu = m.menu
+	m.player.playlist = songs
+	// 	if m.player.mode == PmIntelligent {
+	// 		m.player.SetPlayMode("")
+	// 	}
+	// 	_ = m.player.PlaySong(songs[selectedIndex], DurationNext)
+	// }
+
+}
+
 // likePlayingSong like/unlike playing song
 func likePlayingSong(m *NeteaseModel, isLike bool) {
 	loading := NewLoading(m)
@@ -335,7 +390,7 @@ func likePlayingSong(m *NeteaseModel, isLike bool) {
 
 	likeService := service.LikeService{
 		ID: strconv.FormatInt(m.player.playlist[m.player.curSongIndex].Id, 10),
-		L: strconv.FormatBool(isLike),
+		L:  strconv.FormatBool(isLike),
 	}
 	likeService.Like()
 
@@ -373,7 +428,7 @@ func likeSelectedSong(m *NeteaseModel, isLike bool) {
 
 	likeService := service.LikeService{
 		ID: strconv.FormatInt(songs[m.selectedIndex].Id, 10),
-		L: strconv.FormatBool(isLike),
+		L:  strconv.FormatBool(isLike),
 	}
 	likeService.Like()
 
