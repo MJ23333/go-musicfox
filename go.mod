@@ -14,6 +14,7 @@ require (
 	github.com/gomodule/redigo v1.8.4 // indirect
 	github.com/gookit/gcli/v2 v2.3.4
 	github.com/gookit/ini/v2 v2.0.10
+	github.com/jeffallen/seekinghttp v0.0.0-20171214161738-f41d11cb25b7 // indirect
 	github.com/lucasb-eyer/go-colorful v1.2.0
 	github.com/mattn/go-runewidth v0.0.12
 	github.com/muesli/termenv v0.8.1

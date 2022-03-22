@@ -53,7 +53,6 @@ func (c *Timer) Run() {
 	c.options.OnTick()
 	c.done = make(chan struct{})
 
-
 	for {
 		select {
 		case tickAt := <-c.ticker.C:

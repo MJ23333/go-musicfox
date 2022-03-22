@@ -371,17 +371,53 @@ func keyMsgHandle(msg tea.KeyMsg, m *NeteaseModel) (tea.Model, tea.Cmd) {
 		return m, nil
 	}
 	switch msg.String() {
-	case "j", "J", "down":
+	case "down":
 		moveDown(m)
-	case "k", "K", "up":
+	case "j", "J":
+		m.selectedIndex = (m.menuCurPage - 2) * m.menuPageSize
+		prePage(m)
+	case "up":
 		moveUp(m)
-	case "h", "H", "left":
+	case "k", "K":
+		m.selectedIndex = (m.menuCurPage) * m.menuPageSize
+		nextPage(m)
+	case "left":
 		moveLeft(m)
-	case "l", "L", "right":
+	case "right":
 		moveRight(m)
 	case "n", "N", "enter":
 		enterMenu(m)
-	case "b", "B", "esc":
+	case "1":
+		m.selectedIndex = (m.menuCurPage-1)*m.menuPageSize + 1
+		enterMenu(m)
+	case "2":
+		m.selectedIndex = (m.menuCurPage-1)*m.menuPageSize + 2
+		enterMenu(m)
+	case "3":
+		m.selectedIndex = (m.menuCurPage-1)*m.menuPageSize + 3
+		enterMenu(m)
+	case "4":
+		m.selectedIndex = (m.menuCurPage-1)*m.menuPageSize + 4
+		enterMenu(m)
+	case "5":
+		m.selectedIndex = (m.menuCurPage-1)*m.menuPageSize + 5
+		enterMenu(m)
+	case "6":
+		m.selectedIndex = (m.menuCurPage-1)*m.menuPageSize + 6
+		enterMenu(m)
+	case "7":
+		m.selectedIndex = (m.menuCurPage-1)*m.menuPageSize + 7
+		enterMenu(m)
+	case "8":
+		m.selectedIndex = (m.menuCurPage-1)*m.menuPageSize + 8
+		enterMenu(m)
+	case "9":
+		m.selectedIndex = (m.menuCurPage-1)*m.menuPageSize + 9
+		enterMenu(m)
+	case "0":
+		m.selectedIndex = (m.menuCurPage-1)*m.menuPageSize + 0
+		enterMenu(m)
+	case "b", "B", "q":
 		backMenu(m)
 	case " ":
 		spaceKeyHandle(m)
@@ -395,10 +431,10 @@ func keyMsgHandle(msg tea.KeyMsg, m *NeteaseModel) (tea.Model, tea.Cmd) {
 		m.player.SetPlayMode("")
 	case "P":
 		m.player.Intelligence(false)
-	case ",":
+	case "l":
 		// like playing song
 		likePlayingSong(m, true)
-	case ".":
+	case "u":
 		// unlike playing song
 		likePlayingSong(m, false)
 	case "w", "W":
@@ -406,6 +442,10 @@ func keyMsgHandle(msg tea.KeyMsg, m *NeteaseModel) (tea.Model, tea.Cmd) {
 		logout()
 		m.quitting = true
 		return m, tea.Quit
+	case ".":
+		m.player.Speedup()
+	case ",":
+		m.player.Slowdown()
 	case "-":
 		m.player.DownVolume()
 	case "=":

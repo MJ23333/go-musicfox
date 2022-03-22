@@ -144,7 +144,7 @@ func (m *NeteaseModel) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 	case tea.KeyMsg:
 		k := msgWithType.String()
 		// 登录界面输入q不退出
-		if m.modelType == MtMain && (k == "q" || k == "Q" || k == "ctrl+c") {
+		if m.modelType == MtMain && (k == "esc" || k == "ctrl+c") {
 			m.quitting = true
 			return m, tea.Quit
 		}

@@ -243,7 +243,7 @@ func (p *Player) progressView() string {
 	}
 	emptyCells := strings.Repeat(string(config.ConfigRegistry.ProgressEmptyChar), emptySize)
 
-	passedDuration := int(p.Timer.Passed().Seconds())
+	passedDuration := int(float64(p.CurMusic.Duration.Seconds()) * (p.Progress) / 100)
 	allDuration := int(p.CurMusic.Duration.Seconds())
 
 	if allDuration/60 >= 100 {
